@@ -3,12 +3,12 @@
 /**
  * next_char - checks the next character after the %
  * @i: The character
- * @agp: argument pointer 
+ * @agp: argument pointer
  *
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
-  int	next_char(va_list agp, char i)
+int	next_char(va_list agp, char i)
 {
 	int	count;
 
@@ -26,13 +26,13 @@
 
 /**
  * _printf - the main function
- * format: the string 
+ * @format: the string
  *
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
 
-    int _printf(const char *format, ...)
+int _printf(const char *format, ...)
 {
 	va_list	agp;
 	int	i;

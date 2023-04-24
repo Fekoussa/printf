@@ -8,10 +8,10 @@
  */
 int _putchar(char c)
 {
-        return (write(1, &c, 1));
+	return (write(1, &c, 1));
 }
 /**
- * _putstrr - writes string to stdout
+ * _putstr - writes string to stdout
  * @s: string to print
  *
  * Return: On success 1.
@@ -21,6 +21,7 @@ int	_putstr(char *s)
 {
 	int	i;
 	int	count;
+
 	i = 0;
 	count = 0;
 	while (!s)
@@ -45,6 +46,7 @@ int	_putstr(char *s)
 int	_putnbr(int n)
 {
 	int	count;
+
 	count = 0;
 	if (n >= 0 && n <= 9)
 		count += _putchar(n + '0');
