@@ -69,3 +69,27 @@ int	_putnbr(int n)
 	}
 	return (count);
 }
+
+/**
+ * _convert - writes the number to stdout
+ * @i: The number to print
+ *
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+int	_convert(unsigned long i)
+{
+	char    *s;
+	int             count;
+	
+	s = "0123456789abcdef";
+	count = 0;
+	if (i >= 0 && i <= 15)
+		count += ft_putchar(s[i]);
+	if (i > 15)
+	{
+		count += ft_convert(i / 16);
+		count += ft_convert(i % 16);
+	}
+	return (count);
+}
