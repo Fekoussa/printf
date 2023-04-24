@@ -81,15 +81,15 @@ int	_convert(unsigned long i)
 {
 	char    *s;
 	int             count;
-	
+
 	s = "0123456789abcdef";
 	count = 0;
 	if (i >= 0 && i <= 15)
-		count += ft_putchar(s[i]);
+		count += _putchar(s[i]);
 	if (i > 15)
 	{
-		count += ft_convert(i / 16);
-		count += ft_convert(i % 16);
+		count += _convert(i / 16);
+		count += _convert(i % 16);
 	}
 	return (count);
 }
@@ -97,23 +97,19 @@ int	_convert(unsigned long i)
  * print_rev - prints a string in reverse, followed by a new line
  * @s: string to be printed
  */
-void print_rev(char *s)
+void	print_rev(char *s)
 {
-        int i, j, len;
+	int i, j, len;
 
-        i = 0;
-
-        while (s[i] != '\0')
-        {
-                i++;
-        }
-
-        len = i;
-
-        for (j = len - 1; j >= 0; j--)
-        {
-                _putchar(s[j]);
-        }
-
-        _putchar('\n');
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	len = i;
+	for (j = len - 1; j >= 0; j--)
+	{
+		_putchar(s[j]);
+	}
+	_putchar('\n');
 }

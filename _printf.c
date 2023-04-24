@@ -20,13 +20,13 @@ int	next_char(va_list agp, char i)
 	else if (i == 's')
 		count += _putstr(va_arg(agp, char *));
 	else if (i == 'r')
-                count += print_rev(va_arg(agp, char *));
+		count += print_rev(va_arg(agp, char *));
 	else if (i == 'd' || i == 'i')
 		count += _putnbr(va_arg(agp, int));
 	else if (i == 'p')
-        {
-                count += _putstr("0x");
-                count += _convert(va_arg(agp, unsigned long));
+	{
+		count += _putstr("0x");
+		count += _convert(va_arg(agp, unsigned long));
 	}
 	return (count);
 }
