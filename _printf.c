@@ -3,11 +3,12 @@
 /**
  * next_char - checks the next character after the %
  * @i: The character
+ * @agp: argument pointer 
  *
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
-int	next_char(va_list agp, char i)
+  int	next_char(va_list agp, char i)
 {
 	int	count;
 
@@ -25,12 +26,13 @@ int	next_char(va_list agp, char i)
 
 /**
  * _printf - the main function
+ * format: the string 
  *
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
 
-int _printf(const char *format, ...)
+    int _printf(const char *format, ...)
 {
 	va_list	agp;
 	int	i;
@@ -53,25 +55,3 @@ int _printf(const char *format, ...)
 	va_end(agp);
 	return (count);
 }
-
-/*
-int main(void)
-{
-	int	len;
-	int	len2;
-	len = _printf("Let's try to printf a simple sentence.\n");
-    len2 = printf("Let's try to printf a simple sentence.\n");
-     _printf("*Length:[%d, %i]\n", len, len);
-    printf("Length:[%d, %i]\n", len2, len2);
-    _printf("*Len:[%d]\n", len);
-    printf("Len:[%d]\n", len2);
-    _printf("*Negative:[%d]\n", -762534);
-    printf("Negative:[%d]\n", -762534);
-    _printf("*Let's try to printf a simple sentence.\n");
-    printf("Let's try to printf a simple sentence.\n");
-    _printf("*Character:[%c]\n", 'H');
-    printf("Character:[%c]\n", 'H');
-    _printf("*String:[%s]\n", "I am a string !");
-    printf("String:[%s]\n", "I am a string !");
-}
-*/
