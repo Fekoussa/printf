@@ -19,6 +19,8 @@ int	next_char(va_list agp, char i)
 		count += _putchar(va_arg(agp, int));
 	else if (i == 's')
 		count += _putstr(va_arg(agp, char *));
+	else if (i == 'r')
+                count += print_rev(va_arg(agp, char *));
 	else if (i == 'd' || i == 'i')
 		count += _putnbr(va_arg(agp, int));
 	else if (i == 'p')
