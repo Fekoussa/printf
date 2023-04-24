@@ -1,64 +1,66 @@
 #include "main.h"
 
-/**
- * next_char - checks the next character after the %
- * @i: The character
- * @agp: argument pointer
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
- */
-int	next_char(va_list agp, char i)
-{
-	int	count;
+void print_buffer(char buffer[], int *buff_ind);
 
-	count = 0;
-	if (i == '%')
-		count += _putchar('%');
-	else if (i == 'c')
-		count += _putchar(va_arg(agp, int));
-	else if (i == 's')
-		count += _putstr(va_arg(agp, char *));
-	else if (i == 'r')
-		count += print_rev(va_arg(agp, char *));
-	else if (i == 'd' || i == 'i')
-		count += _putnbr(va_arg(agp, int));
-	else if (i == 'p')
+/**
+ * _printf - Printf function
+ * @format: format.
+ * Return: Printed chars.
+ */
+int _printf(const char *format, ...)
+{
+	int i, printed = 0, printed_chars = 0;
+	int flags, width, precision, size, buff_ind = 0;
+	va_list list;
+	char buffer[BUFF_SIZE];
+
+	if (format == NULL)
+		return (-1);
+
+	va_start(list, format);
+
+	for (i = 0; format && format[i] != '\0'; i++)
 	{
-		count += _putstr("0x");
-		count += _convert(va_arg(agp, unsigned long));
+		if (format[i] != '%')
+		{
+			buffer[buff_ind++] = format[i];
+			if (buff_ind == BUFF_SIZE)
+				print_buffer(buffer, &buff_ind);
+			/* write(1, &format[i], 1);*/
+			printed_chars++;
+		}
+		else
+		{
+			print_buffer(buffer, &buff_ind);
+			flags = get_flags(format, &i);
+			width = get_width(format, &i, list);
+			precision = get_precision(format, &i, list);
+			size = get_size(format, &i);
+			++i;
+			printed = handle_print(format, &i, list, buffer,
+				flags, width, precision, size);
+			if (printed == -1)
+				return (-1);
+			printed_chars += printed;
+		}
 	}
-	return (count);
+
+	print_buffer(buffer, &buff_ind);
+
+	va_end(list);
+
+	return (printed_chars);
 }
 
 /**
- * _printf - the main function
- * @format: the string
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * print_buffer - Prints the contents of the buffer if it exist
+ * @buffer: Array of chars
+ * @buff_ind: Index at which to add next char, represents the length.
  */
-
-int _printf(const char *format, ...)
+void print_buffer(char buffer[], int *buff_ind)
 {
-	va_list	agp;
-	int	i;
-	int	count;
+	if (*buff_ind > 0)
+		write(1, &buffer[0], *buff_ind);
 
-	va_start(agp, format);
-	i = 0;
-	count = 0;
-	while (format[i])
-	{
-		if (format[i] == '%')
-		{
-			i++;
-			count += next_char(agp, format[i]);
-		}
-		else
-			count += _putchar(format[i]);
-		i++;
-	}
-	va_end(agp);
-	return (count);
+	*buff_ind = 0;
 }
